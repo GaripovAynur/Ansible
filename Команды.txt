@@ -4,17 +4,30 @@ nano hosts.txt
 
 
 ansible -i hosts.txt all -m ping
+
 ansible -i hosts.txt all -m ping --ask-pass # С запросом пароля
+
 ansible-inventory --list 					# показывает все хосты и группы хостов
+
 ansible all -m setup						# Атрибуты ОС, выдает интересные параметры ОС
+
 ansible all -m shell -a "uptime"	
+
 ansible all -m copy -a "src=./privet.txt dest=/home mode=777" - b     #Копируем правами sudo -b
+
 ansible all -m file -a "path=/home/privet.txt state=absent" - b		# Удалить
+
 ansible all -m get_url -a "url=https://... dest=/home" - b			# Скачать из сайта
+
 ansible all -m yum -a "name=stress state=installed" -b				#Установка программы
+
 ansible all -m yum -a "name=stress state=removed" -b				#Удаление программы
+
 ansible all -m service -a "name=httpd state=started enabled=yes" -b #Запуск приложения
-ansible-doc -l #Показывает всю документацию по командам
+
+ansible-doc -l 														#Показывает всю документацию по командам
+
+
 
 Group_vars
 Если хотим уменьшить файл hosts.txt, необходимо создать в папке Ansible создать папку group_vars, создать 
@@ -24,3 +37,46 @@ ansible_pass : 12345
 
 Playbook
 Ansible-playbook Playbook2.yml
+
+Block-When
+Playbook3.yml
+
+Loop, with_items, until, with_fileglob
+Playbook4.yml
+Playbook5.yml
+
+Хранение секретов ansible-vault
+
+ansible-vault create my.txt   #Создать секретный файл
+ansible-vault view my.txt   #Посмотреть содержимое
+ansible-vault edit my.txt   #Редактировать
+ansible-vault rekey my.txt   #Изменить пароль
+
+ansible-vault encrypt playbook.yml # Зашифровать playbook
+ansible-vault decrypt playbook.yml # Расшифровать playbook
+
+ansible-playbook playbook.yml --ask-vault-pass # Запуск зашифрованного playbook
+
+
+
+
+
+Jinja Template # смотри видео.
+
+
+Создание Ролей - Roles  # Это разбиение playbook на файлы, где отдельно vars, tasks, handles и т.д.
+
+
+Внешние переменные -extra-vars
+- name: Install Apache
+  hosts: "{{ MYHOSTS }}"
+  become: yes 
+  
+ansible-playbook playbook.yml --extra-var "MYHOSTS=centos"
+  
+Import,include #смотри видео
+
+Перенаправление выполнения Task из Playbook на определённый сервер - delegate_to #смотри видео
+
+Перехват и контроль ошибок #смотри видео
+

@@ -1,0 +1,22 @@
+---
+
+- name: Loops Playbook
+  hosts: all
+  become: yes
+  
+  
+  
+  task:
+  - name: Say Hello to ALL
+    debug: msg="Hello {{ item }}"
+    loop:
+        - "Vasya"
+        - "Petya"
+        - "Olya"
+        
+  - name: Install many packaged
+    yum: name={{ item }} state=installed
+    with_items:
+        - python
+        - tree
+        - mysql-client
