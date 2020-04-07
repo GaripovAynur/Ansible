@@ -1,0 +1,17 @@
+mkdir ansible
+cd ansible/
+nano hosts.txt
+
+
+ansible -i hosts.txt all -m ping
+ansible -i hosts.txt all -m ping --ask-pass # С запросом пароля
+ansible-inventory --list 					# показывает все хосты и группы хостов
+ansible all -m setup						# Атрибуты ОС, выдает интересные параметры ОС
+ansible all -m shell -a "uptime"	
+ansible all -m copy -a "src=./privet.txt dest=/home mode=777" - b     #Копируем правами sudo -b
+ansible all -m file -a "path=/home/privet.txt state=absent" - b		# Удалить
+ansible all -m get_url -a "url=https://... dest=/home" - b
+ansible all -m yum -a "name=stress state=installed" -b				#Установка программы
+ansible all -m yum -a "name=stress state=removed" -b				#Удаление программы
+ansible all -m service -a "name=httpd state=started enabled=yes" -b #Запуск приложения
+ansible-doc -l #Показывает всю документацию по командам

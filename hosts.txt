@@ -1,0 +1,10 @@
+[centos]
+CSDocker ansible_host=192.168.11.92
+
+[ubuntu]
+UbDocker ansible_host=192.168.11.94
+
+
+[red:children]
+centos
+
