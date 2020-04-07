@@ -25,7 +25,7 @@ ansible all -m yum -a "name=stress state=removed" -b				#Удаление про
 
 ansible all -m service -a "name=httpd state=started enabled=yes" -b #Запуск приложения
 
-ansible-doc -l 														#Показывает всю документацию по командам
+ansible-doc -l 												#Показывает всю документацию по командам
 
 
 
