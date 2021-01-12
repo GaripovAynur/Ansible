@@ -6,6 +6,7 @@ nano hosts.txt
 ansible -i hosts.txt all -m ping
 ansible -i hosts.txt all -m ping --ask-pass # С запросом пароля
 ansible-inventory --list 					# показывает все хосты и группы хостов
+ansible-inventory --graph 					# показывает все хосты и группы хостов в виде графа
 ansible all -m setup						# Атрибуты ОС, выдает интересные параметры ОС
 ansible all -m shell -a "uptime"	
 ansible all -m copy -a "src=./privet.txt dest=/home mode=777" - b     #Копируем правами sudo -b
