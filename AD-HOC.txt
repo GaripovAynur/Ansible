@@ -16,3 +16,4 @@ ansible all -m yum -a "name=stress state=installed" -b				#Установка п
 ansible all -m yum -a "name=stress state=removed" -b				#Удаление программы
 ansible all -m service -a "name=httpd state=started enabled=yes" -b #Запуск приложения
 ansible-doc -l #Показывает всю документацию по командам
+ansible-playbook -b reactjs.yaml -vv # Запуск определенный плейбук
