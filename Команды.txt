@@ -28,6 +28,8 @@ ansible all -m service -a "name=httpd state=started enabled=yes" -b #Запус�
 ansible-doc -l 												#Показывает всю документацию по командам
 
 
+ansble-galaxy init deploy_apache_web    # Создает роли, т.е. файл Playbook.yml рраскидывает по папкам, defaults, files, handlers, meta, tasks, tempelets vars.
+
 
 Group_vars
 Если хотим уменьшить файл hosts.txt, необходимо создать в папке Ansible создать папку group_vars, создать 
