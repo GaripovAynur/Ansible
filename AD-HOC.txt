@@ -2,6 +2,7 @@ mkdir ansible
 cd ansible/
 nano hosts.txt
 
+ansible-playbook rds_prod.yml  --syntax-chec #Проверка синтаксиса.
 
 ansible -i hosts.txt all -m ping
 ansible -i hosts.txt all -m ping --ask-pass # С запросом пароля
