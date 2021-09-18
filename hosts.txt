@@ -1,6 +1,6 @@
 [centos]
-Ansible_CentOS ansible_host=192.168.11.80 ansible_user=root ansible_ssh_private_key_file=/home/garipe/.ssh/id_rsa.pub
-Ansible_CentOS_2 ansible_host=192.168.11.81 ansible_user=root ansible_ssh_private_key_file=/home/garipe/.ssh/id_rsa.pub
+Ansible_CentOS ansible_host=192.168.11.80 #ansible_user=root ansible_ssh_private_key_file=/home/garipe/.ssh/id_rsa.pub
+Ansible_CentOS_2 ansible_host=192.168.11.81 #ansible_user=root ansible_ssh_private_key_file=/home/garipe/.ssh/id_rsa.pub
 
 
 [ubuntu]
@@ -9,4 +9,10 @@ UbDocker ansible_host=192.168.11.94
 
 [red:children]
 centos
+
+
+
+[centos:vars]
+ansible_user=root
+ansible_ssh_private_key_file=/home/garipe/.ssh/id_rsa.pub
 
