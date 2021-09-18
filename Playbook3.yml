@@ -2,55 +2,59 @@
 - name: Install Apache
   hosts: all
   become: yes
-  
-  
+
+
   vars:
     source_file: ./MyWebSite/index.html
-    destion_file: /var/www/html
-    
+    destion_file: /user/home/nginx/html
+
   tasks:
   - name: Check and Print Linux Version
     debug: var=ansible_os_family #Распечатает какие Linux
-  
+
   - shell: uptime # Определяем время
     register: result # Время в переменную
   - debug: var=result # Распечатать result
-      
-  
-  - block: #=========RedHat===========  
-    
+
+
+  - block: #=========RedHat install Apache===========
+
     - name: Install Apache WebServer
-      yum: name=httpd state=latest
-    
+      yum: name={{ item }} state=latest
+      loop:
+        - net-tools
+        - nano
+        - nginx
+
     - name: Copy MyHomePage to Servers
       copy: src={{ source_file }}  dest={{ destion_file }} mode=0555
       notify: Restart Apache RedHat
-    
-    - name: Start and Enable Apache
-      service: name=httpd state=started enabled=yes
-    
-    when: ansible_os_family == "RedHat" #Установить только на RedHat
-   
 
-  - block: #=========Ubuntu===========  
-    
+    - name: Start and Enable Apache
+      service: name=nginx state=started enabled=yes
+
+    when: ansible_os_family == "RedHat" #Установить только на RedHat
+
+
+  - block: #=========Ubuntu Install apache2==========
+
     - name: Install Apache WebServer
       yum: name=apache2 state=latest
-    
+
     - name: Copy MyHomePage to Servers
       copy: src={{ source_file }}  dest={{ destion_file }} mode=0555
       notify: Restart Apache Debian
-    
+
     - name: Start and Enable Apache
       service: name=apache2 state=started enabled=yes
-    
+
     when: ansible_os_family == "Debian"
 
 
-   
+
   handlers:
   - name: Restart Apache RedHat
-    service: name=httpd state=restarted
-    
+    service: name=nginx state=restarted
+
   - name: Restart Apache Debian
     service: name=apache2 state=restarted
