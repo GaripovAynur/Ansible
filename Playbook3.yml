@@ -3,14 +3,20 @@
   hosts: all
   become: yes
   
+  
   vars:
     source_file: ./MyWebSite/index.html
     destion_file: /var/www/html
-  
+    
   tasks:
   - name: Check and Print Linux Version
-    debug: var=ansible_os_family
-    
+    debug: var=ansible_os_family #Распечатает какие Linux
+  
+  - shell: uptime # Определяем время
+    register: result # Время в переменную
+  - debug: var=result # Распечатать result
+      
+  
   - block: #=========RedHat===========  
     
     - name: Install Apache WebServer
@@ -23,7 +29,7 @@
     - name: Start and Enable Apache
       service: name=httpd state=started enabled=yes
     
-    when: ansible_os_family == "RedHat"
+    when: ansible_os_family == "RedHat" #Установить только на RedHat
    
 
   - block: #=========Ubuntu===========  
