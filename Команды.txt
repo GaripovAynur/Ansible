@@ -17,7 +17,7 @@ ansible all -m service -a "name=httpd state=started enabled=yes" -b   #Запу�
 ansible-doc -l 												                                #Показывает всю документацию по командам
 
 ansible-playbook playbook.yaml --ask-become-pass                      # Указываем sudo пароль
-
+ansible-playbook playbook.yml --syntax-check                          # Проверка синтаксиса
 ansible-playbook playbook.yml -t nginx                                # Установить только у тех у которых есть tags
 ansible-playbook playbook.yml --skip-tags nginx                       # Не установить где есть tags nginx
 
